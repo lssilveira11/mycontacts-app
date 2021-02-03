@@ -18,7 +18,7 @@
         </div>
       </form>
     </nav>
-    <ContactList :contacts="filteredContacts" v-on:delete-contact="deleteContact" />
+    <ContactList :contacts="filteredContacts" v-on:delete-contact="deleteContact" :loading="loading" />
   </div>
 </template>
 
@@ -33,6 +33,7 @@ export default {
   },
   props: {
     contacts: Array,
+    loading: Boolean,
   },
   data() {
     return {

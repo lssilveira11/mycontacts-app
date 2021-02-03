@@ -1,32 +1,43 @@
 <template>
-  <ul class="list-group">
-    <li
-      href="#"
-      class="list-group-item"
-      v-bind:key="c.id"
-      v-for="c in contacts"
-    >
-      <ContactListItem
-        :contact="c"
-        @show-details="showDetails"
-        @edit-contact="updateContact"
-        @delete-contact="deleteContact"
-      />
-    </li>
-    <li href="#" class="list-group-item">
-      <nav aria-label="Contact list page navigation">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-      </nav>
-    </li>
-  </ul>
+  <div>
+    <div class="card" v-if="loading">
+      <div class="card-body text-center py-5">
+        <div class="spinner-border" role="status" >
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+
+    <ul class="list-group" v-if="!loading">
+      <li
+        href="#"
+        class="list-group-item"
+        v-bind:key="c.id"
+        v-for="c in contacts"
+      >
+        <ContactListItem
+          :contact="c"
+          :loading="loading"
+          @show-details="showDetails"
+          @edit-contact="updateContact"
+          @delete-contact="deleteContact"
+        />
+      </li>
+      <li href="#" class="list-group-item">
+        <nav aria-label="Contact list page navigation">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
+  </div>
 </template>
   
 <script>
@@ -39,6 +50,7 @@ export default {
   },
   props: {
     contacts: Array,
+    loading: Boolean,
   },
   methods: {
     showDetails(contact) {
