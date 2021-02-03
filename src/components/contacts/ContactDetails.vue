@@ -9,7 +9,7 @@
             name="contactName"
             id="contactName"
             :class="[readonly ? 'form-control-plaintext' : 'form-control']"
-            :value="name"
+            v-model="name"
           />
         </div>
         <div class="col form-group">
@@ -19,7 +19,7 @@
             name="contactEmail"
             id="contactEmail"
             :class="[readonly ? 'form-control-plaintext' : 'form-control']"
-            :value="email"
+            v-model="email"
           />
         </div>
         <div class="col form-group">
@@ -29,7 +29,7 @@
             name="contactPhone"
             id="contactPhone"
             :class="[readonly ? 'form-control-plaintext' : 'form-control']"
-            :value="phone"
+            v-model="phone"
           />
         </div>
       </div>
@@ -39,27 +39,54 @@
 
 <script>
 import { bus } from "@/main";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   name: "ContactDetails",
   components: {},
   props: {
     readonly: Boolean,
-    contact: Object,
+    action: String,
   },
   data() {
-    return (
-      this.$route.params.contact || {
-        name: "",
-        email: "",
-        phone: "",
-      }
-    );
+    if (this.$route.params.contact) {
+      return Object.assign({}, this.$route.params.contact);
+    }
+
+    return {
+      name: "",
+      email: "",
+      phone: "",
+    };
   },
   created() {
     if (!this.readonly) {
       bus.$emit("header-set-action", "save");
     }
+
+    bus.$on("header-save", this.saveContact);
+  },
+  methods: {
+    saveContact() {
+      let contact = {
+        id: this.id || uuidv4(),
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+      };
+
+      if (this.action === "create") {
+        this.$emit("create-contact", contact);
+      } else if (this.action === "update") {
+        this.$emit("update-contact", contact);
+      }
+
+      this.$router.push({ name: "Home" });
+      
+      // MUST DO THIS, otherwise this method will continue to be called from old instances, 
+      // because Vue always creates a new Component every time the route changes
+      bus.$off("header-save");
+    },
   },
 };
 </script>

@@ -1,5 +1,8 @@
 <template>
-  <ContactList :contacts="contacts" />
+  <ContactList
+    :contacts="contacts"
+    v-on:delete-contact="deleteContact"
+  />
 </template>
 
 <script>
@@ -14,8 +17,13 @@ export default {
   props: {
     contacts: Array,
   },
-  created(){
-    bus.$emit("header-set-action","new")
+  created() {
+    bus.$emit("header-set-action", "new-contact");
+  },
+  methods: {
+    deleteContact(id){
+      this.$emit("delete-contact", id);
+    }
   }
 };
 </script>

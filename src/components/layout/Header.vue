@@ -1,8 +1,8 @@
 <template>
   <nav class="navbar navbar-dark bg-dark shadow-sm">
-    <router-link to="/" class="navbar-brand">MyContacts</router-link>
+    <router-link to="/" class="navbar-brand">{{title}}</router-link>
     <button class="btn btn-outline-success my-2 my-sm-0" @click="btnClicked">
-      {{ action === "new" ? "New Contact" : "Save" }}
+      {{ action === "new-contact" ? "New Contact" : "Save" }}
     </button>
   </nav>
 </template>
@@ -15,22 +15,23 @@ export default {
   components: {},
   data() {
     return {
-      action: "new",
+      title: "MyContacts",
+      action: "new-contact",
     };
   },
   methods: {
     btnClicked: function() {
-      if (this.action === "new") {
-        this.$router.push("newContact");
+      if (this.action === "new-contact") {
+        this.$router.push({name: "Create"});
       }
       else if (this.action === "save") {
-        this.$router.push("Home");
+        bus.$emit("header-save")
       }
     },
   },
   created() {
-    console.info("App this router:", this.$router);
-    console.info("App currentRoute:", this.$router.currentRoute);
+    // console.info("App this router:", this.$router);
+    // console.info("App currentRoute:", this.$router.currentRoute);
 
     bus.$on("header-set-action", (action) => {
       this.action = action;

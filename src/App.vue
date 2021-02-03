@@ -2,13 +2,17 @@
   <div id="app" class="bg-light">
     <div class="container">
       <Header />
-      <router-view :contacts="contacts"></router-view>
+      <router-view
+        :contacts="contacts"
+        v-on:create-contact="createContact"
+        v-on:update-contact="updateContact"
+        v-on:delete-contact="deleteContact"
+      ></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import { bus } from "@/main";
 import Header from "@/components/layout/Header";
 
 export default {
@@ -16,20 +20,13 @@ export default {
   components: {
     Header,
   },
-  created() {
-    bus.$on("add-contact", (contact) => {
-      this.addContact(contact);
-    });
-    bus.$on("update-contact", (contact) => {
-      this.updateContact(contact);
-    });
-    bus.$on("delete-contact", (id) => {
-      this.deleteContact(id);
-    });
-  },
   methods: {
-    addContact(contact) {
-      this.contacts = [...this.contacts, contact];
+    createContact(contact) {
+      console.log(
+        "🚀 ~ file: App.vue ~ line 32 ~ createContact ~ contact",
+        contact
+      );
+      this.contacts = [...this.contacts, Object.assign({}, contact)];
     },
     updateContact(contact) {
       console.log(
@@ -37,11 +34,13 @@ export default {
         contact
       );
       const idx = this.contacts.findIndex((c) => c.id == contact.id);
-      this.contacts[idx].name = contact.name
-      this.contacts[idx].email = contact.email
-      this.contacts[idx].phone = contact.phone
+      console.log("🚀 ~ file: App.vue ~ line 41 ~ updateContact ~ idx", idx);
+      this.contacts[idx].name = contact.name;
+      this.contacts[idx].email = contact.email;
+      this.contacts[idx].phone = contact.phone;
     },
     deleteContact(id) {
+      console.log("🚀 ~ file: App.vue ~ line 46 ~ deleteContact ~ id", id);
       // console.log(id);
       this.contacts = this.contacts.filter((c) => c.id !== id);
     },

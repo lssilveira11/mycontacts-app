@@ -25,13 +25,16 @@
             aria-expanded="false"
           ></button>
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item"  href="#" @click.prevent="editContact(contact)"
+            <a
+              class="dropdown-item"
+              href="#"
+              @click.prevent="updateContact(contact)"
               >Edit</a
             >
             <a
               class="dropdown-item text-danger"
               href="#"
-              @click.prevent="$emit('delete-contact', contact.id)"
+              @click.prevent="deleteContact(contact.id)"
               >Delete</a
             >
           </div>
@@ -50,15 +53,14 @@ export default {
   },
   methods: {
     showDetails: function (contact) {
-      // console.log(
-      // "🚀 ~ file: ContactListItem.vue ~ line 51 ~ contact",
-      // contact
-      // );
       this.$emit("show-details", contact);
     },
-    editContact: function(contact) {
+    updateContact: function (contact) {
       this.$emit("edit-contact", contact);
-    }
+    },
+    deleteContact: function (id) {
+      this.$emit("delete-contact", id);
+    },
   },
 };
 </script>

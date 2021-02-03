@@ -11,27 +11,30 @@ const routes = [{
     component: Home
   },
   {
-    path: '/contactDetails',
-    name: 'contactDetails',
+    path: '/details',
+    name: 'Details',
     component: ContactDetails,
     props: {
-      readonly: true
+      readonly: true,
+      action: "details"
     }
   },
   {
-    path: '/newContact',
-    name: 'newContact',
+    path: '/create',
+    name: 'Create',
     component: ContactDetails,
     props: {
       readonly: false,
+      action: "create"
     }
   },
   {
-    path: '/editContact',
-    name: 'editContact',
+    path: '/update',
+    name: 'Update',
     component: ContactDetails,
     props: {
-      readonly: false
+      readonly: false,
+      action: "update"
     }
   },
   {

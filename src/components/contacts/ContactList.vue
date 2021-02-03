@@ -9,7 +9,7 @@
       <ContactListItem
         :contact="c"
         @show-details="showDetails"
-        @edit-contact="editContact"
+        @edit-contact="updateContact"
         @delete-contact="deleteContact"
       />
     </li>
@@ -30,7 +30,6 @@
 </template>
   
 <script>
-import { bus } from "@/main";
 import ContactListItem from "./ContactListItem";
 
 export default {
@@ -42,20 +41,20 @@ export default {
     contacts: Array,
   },
   methods: {
-    deleteContact(id) {
-      bus.$emit("delete-contact", id);
-    },
     showDetails(contact) {
       this.$router.push({
-        name: "contactDetails",
+        name: "Details",
         params: { contact: contact },
       });
     },
-    editContact(contact) {
+    updateContact(contact) {
       this.$router.push({
-        name: "editContact",
+        name: "Update",
         params: { contact: contact },
       });
+    },
+    deleteContact(id) {
+      this.$emit("delete-contact", id);
     },
   },
 };
