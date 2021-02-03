@@ -10,13 +10,13 @@
         </div>
       </div>
     </div>
-    <div class="col-4 col-sm-3 text-right">
+    <div class="col-4 col-sm-3 text-right"> 
       <div
         class="btn-group"
         role="group"
         aria-label="Button group with nested dropdown"
       >
-        <button class="btn btn-outline-secondary" @click="showDetails(contact)">
+        <button class="btn btn-sm btn-outline-secondary" @click="showDetails(contact)">
           Details
         </button>
 

@@ -1,14 +1,14 @@
 <template>
   <nav class="navbar navbar-dark bg-dark shadow-sm">
     <button
-      class="btn btn-outline-light my-2 my-sm-0"
+      class="btn btn-sm btn-outline-light"
       v-if="allowBack"
       @click="backClicked"
     >
       Back
     </button>
-    <router-link to="/" class="navbar-brand">{{ title }}</router-link>
-    <button class="btn btn-outline-success my-2 my-sm-0" @click="btnClicked">
+    <router-link to="/" class="navbar-brand w-25">{{ title }}</router-link>
+    <button class="btn btn-sm btn-outline-success" @click="btnClicked">
       {{ action === "new-contact" ? "New Contact" : "Save" }}
     </button>
   </nav>
