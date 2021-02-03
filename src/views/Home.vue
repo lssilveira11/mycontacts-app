@@ -49,6 +49,7 @@ export default {
   },
   created() {
     bus.$emit("header-set-action", "new-contact");
+    bus.$emit("header-allow-back", false);
   },
   methods: {
     deleteContact(id) {

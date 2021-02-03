@@ -1,6 +1,13 @@
 <template>
   <nav class="navbar navbar-dark bg-dark shadow-sm">
-    <router-link to="/" class="navbar-brand">{{title}}</router-link>
+    <button
+      class="btn btn-outline-light my-2 my-sm-0"
+      v-if="allowBack"
+      @click="backClicked"
+    >
+      Back
+    </button>
+    <router-link to="/" class="navbar-brand">{{ title }}</router-link>
     <button class="btn btn-outline-success my-2 my-sm-0" @click="btnClicked">
       {{ action === "new-contact" ? "New Contact" : "Save" }}
     </button>
@@ -17,16 +24,19 @@ export default {
     return {
       title: "MyContacts",
       action: "new-contact",
+      allowBack: false,
     };
   },
   methods: {
-    btnClicked: function() {
+    btnClicked: function () {
       if (this.action === "new-contact") {
-        this.$router.push({name: "Create"});
+        this.$router.push({ name: "Create" });
+      } else if (this.action === "save") {
+        bus.$emit("header-save");
       }
-      else if (this.action === "save") {
-        bus.$emit("header-save")
-      }
+    },
+    backClicked: function () {
+      this.$router.back();
     },
   },
   created() {
@@ -35,6 +45,10 @@ export default {
 
     bus.$on("header-set-action", (action) => {
       this.action = action;
+    });
+
+    bus.$on("header-allow-back", (allowBack) => {
+      this.allowBack = allowBack;
     });
   },
 };

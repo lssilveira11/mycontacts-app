@@ -63,6 +63,7 @@ export default {
     if (!this.readonly) {
       bus.$emit("header-set-action", "save");
     }
+    bus.$emit("header-allow-back", true);
 
     bus.$on("header-save", this.saveContact);
   },
