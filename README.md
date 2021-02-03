@@ -20,12 +20,21 @@ These material was used to study and quickly understand about Vue.js:
 
 ## Structure and Screenshots
 
+
 ## Project setup
+
+To run this project, clone this repository and execute the commands bellow. 
+
+NodeJS with npm package manager is a prerequisite. The commando bellow installs all the dependencies of this project.
+
 ```
 npm install
 ```
 
 ### Compiles and hot-reloads for development
+
+Execute this command to run this project in your local browser.
+
 ```
 npm run serve
 ```

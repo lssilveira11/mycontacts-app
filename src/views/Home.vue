@@ -2,23 +2,20 @@
   <div>
     <nav class="navbar navbar-light bg-secondary">
       <form class="form-inline">
-        <div class="input-group">
-          <input
-            class="form-control"
-            type="search"
-            placeholder="Search by name..."
-            aria-label="Search"
-            v-model="searchValue"
-          />
-          <div class="input-group-append">
-            <button class="btn btn-dark my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </div>
-        </div>
+        <input
+          class="form-control"
+          type="search"
+          placeholder="Search by name..."
+          aria-label="Search"
+          v-model="searchValue"
+        />
       </form>
     </nav>
-    <ContactList :contacts="filteredContacts" v-on:delete-contact="deleteContact" :loading="loading" />
+    <ContactList
+      :contacts="filteredContacts"
+      v-on:delete-contact="deleteContact"
+      :loading="loading"
+    />
   </div>
 </template>
 
@@ -43,7 +40,9 @@ export default {
   computed: {
     filteredContacts() {
       return this.contacts.filter((item) => {
-        return item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1;
+        return (
+          item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) > -1
+        );
       });
     },
   },
