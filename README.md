@@ -20,6 +20,9 @@ These material was used to study and quickly understand about Vue.js:
 
 ## Structure and Screenshots
 
+![Project scheme (draft)](/screnshots/scheme.jpg?raw=true "Project scheme (draft)")
+![Home screen](/screnshots/home.png?raw=true "Home screen")
+![Details screen](/screnshots/details.png?raw=true "Details screen")
 
 ## Project setup
 
