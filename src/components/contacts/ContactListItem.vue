@@ -1,11 +1,16 @@
 <template>
-  <div class="row justify-content-between align-items-center">
-    <div class="col-auto">
-      <h5>{{ contact.name }}</h5>
-      <small class="d-block">{{ contact.email }}</small>
-      <small class="d-block">{{ contact.phone }}</small>
+  <div class="row  align-items-center">
+    <div class="col-8 col-sm-9">
+      <div class="row row-cols-1 row-cols-md-2">
+        <div class="col">
+          <h5>{{ contact.name }}</h5>
+        </div>
+        <div class="col">
+          <small class="d-block">{{ contact.phone }}</small>
+        </div>
+      </div>
     </div>
-    <div class="col-auto">
+    <div class="col-4 col-sm-3 text-right">
       <div
         class="btn-group"
         role="group"
