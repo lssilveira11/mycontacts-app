@@ -3,15 +3,19 @@
 </template>
 
 <script>
-import ContactList from '@/components/contacts/ContactList'
+import { bus } from "@/main";
+import ContactList from "@/components/contacts/ContactList";
 
 export default {
   name: "Home",
   components: {
-    ContactList
+    ContactList,
   },
   props: {
-    contacts: Array
+    contacts: Array,
+  },
+  created(){
+    bus.$emit("header-set-action","new")
   }
 };
 </script>

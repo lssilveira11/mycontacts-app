@@ -11,7 +11,9 @@
         role="group"
         aria-label="Button group with nested dropdown"
       >
-        <router-link to="contactDetails" class="btn btn-outline-secondary">Details</router-link>
+        <button class="btn btn-outline-secondary" @click="showDetails(contact)">
+          Details
+        </button>
 
         <div class="btn-group" role="group">
           <button
@@ -23,8 +25,8 @@
             aria-expanded="false"
           ></button>
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <router-link to="/editContact" class="dropdown-item"
-              >Edit</router-link
+            <a class="dropdown-item"  href="#" @click.prevent="editContact(contact)"
+              >Edit</a
             >
             <a
               class="dropdown-item text-danger"
@@ -46,6 +48,17 @@ export default {
   props: {
     contact: Object,
   },
-  methods: {},
+  methods: {
+    showDetails: function (contact) {
+      // console.log(
+      // "🚀 ~ file: ContactListItem.vue ~ line 51 ~ contact",
+      // contact
+      // );
+      this.$emit("show-details", contact);
+    },
+    editContact: function(contact) {
+      this.$emit("edit-contact", contact);
+    }
+  },
 };
 </script>

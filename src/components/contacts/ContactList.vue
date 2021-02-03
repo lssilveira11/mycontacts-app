@@ -6,7 +6,12 @@
       v-bind:key="c.id"
       v-for="c in contacts"
     >
-      <ContactListItem :contact="c" @delete-contact="deleteContact" />
+      <ContactListItem
+        :contact="c"
+        @show-details="showDetails"
+        @edit-contact="editContact"
+        @delete-contact="deleteContact"
+      />
     </li>
     <li href="#" class="list-group-item">
       <nav aria-label="Contact list page navigation">
@@ -40,6 +45,18 @@ export default {
     deleteContact(id) {
       bus.$emit("delete-contact", id);
     },
-  }
+    showDetails(contact) {
+      this.$router.push({
+        name: "contactDetails",
+        params: { contact: contact },
+      });
+    },
+    editContact(contact) {
+      this.$router.push({
+        name: "editContact",
+        params: { contact: contact },
+      });
+    },
+  },
 };
 </script>
