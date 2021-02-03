@@ -1,9 +1,9 @@
 <template>
-  <div class="row  align-items-center">
+  <div class="row no-gutters align-items-center">
     <div class="col-8 col-sm-9">
       <div class="row row-cols-1 row-cols-md-2">
         <div class="col">
-          <h5>{{ contact.name }}</h5>
+          {{ contact.name }}
         </div>
         <div class="col">
           <small class="d-block">{{ contact.phone }}</small>
