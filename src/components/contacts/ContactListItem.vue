@@ -11,7 +11,7 @@
         role="group"
         aria-label="Button group with nested dropdown"
       >
-        <button type="button" class="btn btn-outline-secondary">Details</button>
+        <router-link to="contactDetails" class="btn btn-outline-secondary">Details</router-link>
 
         <div class="btn-group" role="group">
           <button
@@ -23,8 +23,15 @@
             aria-expanded="false"
           ></button>
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-            <a class="dropdown-item" href="#">Edit</a>
-            <a class="dropdown-item text-danger" href="#">Delete</a>
+            <router-link to="/editContact" class="dropdown-item"
+              >Edit</router-link
+            >
+            <a
+              class="dropdown-item text-danger"
+              href="#"
+              @click.prevent="$emit('delete-contact', contact.id)"
+              >Delete</a
+            >
           </div>
         </div>
       </div>
@@ -39,5 +46,6 @@ export default {
   props: {
     contact: Object,
   },
+  methods: {},
 };
 </script>

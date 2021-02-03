@@ -1,10 +1,15 @@
 <template>
   <ul class="list-group">
-    <li href="#" class="list-group-item" v-bind:key="c.id" v-for="c in contacts">
-      <ContactItem v-bind:contact="c" />
+    <li
+      href="#"
+      class="list-group-item"
+      v-bind:key="c.id"
+      v-for="c in contacts"
+    >
+      <ContactListItem v-bind:contact="c" v-on:delete-contact="deleteContact" />
     </li>
     <li href="#" class="list-group-item">
-      <nav aria-label="Page navigation example">
+      <nav aria-label="Contact list page navigation">
         <ul class="pagination">
           <li class="page-item">
             <a class="page-link" href="#">Previous</a>
@@ -20,12 +25,12 @@
 </template>
   
 <script>
-import ContactItem from './ContactItem'
+import ContactListItem from "./ContactListItem";
 
 export default {
   name: "ContactList",
   components: {
-    ContactItem
+    ContactListItem,
   },
   data() {
     // TODO: fetch from source: https://jsonplaceholder.typicode.com/users
@@ -263,6 +268,12 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    deleteContact: function (id) {
+      // console.log(id);
+      this.contacts = this.contacts.filter((c) => c.id !== id);
+    },
   },
 };
 </script>

@@ -1,9 +1,7 @@
 <template>
-  <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">MyContacts</a>
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-      New Contact
-    </button>
+  <nav class="navbar navbar-dark bg-dark shadow-sm">
+    <router-link to="/" class="navbar-brand">MyContacts</router-link>
+    <router-link to="/newContact" class="btn btn-outline-success my-2 my-sm-0">New Contact</router-link>
   </nav>
 </template>
 
