@@ -1,5 +1,5 @@
 <template>
-  <ContactList />
+  <ContactList :contacts="contacts" />
 </template>
 
 <script>
@@ -10,6 +10,9 @@ export default {
   components: {
     ContactList
   },
+  props: {
+    contacts: Array
+  }
 };
 </script>
 

@@ -3,9 +3,13 @@
     <div class="card-body rounded-bottom">
       <div class="form-group">
         <label for="contactName">Name</label>
-        <input type="text" name="contactName" id="contactName"
-        v-bind:class="[readonly ? 'form-control-plaintext' : 'form-control']"
-        v-model="name" />
+        <input
+          type="text"
+          name="contactName"
+          id="contactName"
+          :class="[readonly ? 'form-control-plaintext' : 'form-control']"
+          :value="name"
+        />
       </div>
       <div class="form-group">
         <label for="contactName">Email</label>
@@ -13,8 +17,8 @@
           type="email"
           name="contactEmail"
           id="contactEmail"
-          v-bind:class="[readonly ? 'form-control-plaintext' : 'form-control']"
-          v-model="email"
+          :class="[readonly ? 'form-control-plaintext' : 'form-control']"
+          :value="email"
         />
       </div>
       <div class="form-group">
@@ -23,8 +27,8 @@
           type="text"
           name="contactPhone"
           id="contactPhone"
-          v-bind:class="[readonly ? 'form-control-plaintext' : 'form-control']"
-          v-model="phone"
+          :class="[readonly ? 'form-control-plaintext' : 'form-control']"
+          :value="phone"
         />
       </div>
     </div>
@@ -38,6 +42,13 @@ export default {
   props: {
     readonly: Boolean,
     contact: Object,
+  },
+  data() {
+    return {
+      name: "",
+      email: "",
+      phone: "",
+    };
   },
   created() {
     console.log(this.contact);
