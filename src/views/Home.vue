@@ -70,6 +70,7 @@
 <script>
 import { bus } from "@/main";
 import ContactList from "@/components/contacts/ContactList";
+import _ from 'lodash';
 
 export default {
   name: "Home",
@@ -89,25 +90,7 @@ export default {
   computed: {
     computedContacts() {
       return (
-        this.contacts.
-          // '.slice' is needed to clone the array, because the '.sort' method will mutate the array
-          // and this would throw an error: Unexpected side effect in "computedContacts" computed property 
-          slice() 
-          // sort contacts by the actual sort direction
-          .sort((a, b) => {
-            let mult = 1;
-            if (this.order === "desc") {
-              mult = -1;
-            }
-
-            if (a.name < b.name) {
-              return -1 * mult;
-            }
-            if (a.name > b.name) {
-              return 1 * mult;
-            }
-            return 0;
-          })
+        _.orderBy(this.contacts, 'name', this.order)
       );
     }, 
   },
@@ -120,11 +103,7 @@ export default {
       this.$emit("delete-contact", id);
     },
     toggleSort() {
-      if (this.order === "asc") {
-        this.order = "desc";
-      } else {
-        this.order = "asc";
-      }
+      this.order = (this.order === "asc") ?  "desc" : "asc";
     },
   },
   filters:{
@@ -141,14 +120,11 @@ export default {
           });
     }
   },
-  watch: {
-    order: function () {
-      console.log("order", this.order);
-      // let mult = 1;
-      // if (this.order === "desc") mult = -1;
-      // this.contacts = this.contacts;
-    },
-  },
+  // watch: {
+  //   order: function () {
+  //     console.log("order", this.order);
+  //   },
+  // },
 };
 </script>
 
