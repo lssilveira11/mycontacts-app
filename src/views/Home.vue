@@ -60,7 +60,7 @@
       </button>
     </nav>
     <ContactList
-      :contacts="computedContacts"
+      :contacts="computedContacts | filterByName(searchValue)"
       v-on:delete-contact="deleteContact"
       :loading="loading"
     />
@@ -89,15 +89,11 @@ export default {
   computed: {
     computedContacts() {
       return (
-        this.contacts
-          // first, filter contacts by name, using the search value
-          .filter((item) => {
-            return (
-              item.name.toLowerCase().indexOf(this.searchValue.toLowerCase()) >
-              -1
-            );
-          })
-          // then, sort contacts by the actual sort direction
+        this.contacts.
+          // '.slice' is needed to clone the array, because the '.sort' method will mutate the array
+          // and this would throw an error: Unexpected side effect in "computedContacts" computed property 
+          slice() 
+          // sort contacts by the actual sort direction
           .sort((a, b) => {
             let mult = 1;
             if (this.order === "desc") {
@@ -113,7 +109,7 @@ export default {
             return 0;
           })
       );
-    },
+    }, 
   },
   created() {
     bus.$emit("header-set-action", "new-contact");
@@ -130,6 +126,20 @@ export default {
         this.order = "asc";
       }
     },
+  },
+  filters:{
+    filterByName(contacts, search){
+      // console.log("🚀 ~ file: Home.vue ~ line 138 ~ filterByName ~ search", search)
+
+      return contacts
+          // first, filter contacts by name, using the search value
+          .filter((item) => {
+            return (
+              item.name.toLowerCase().indexOf(search.toLowerCase()) >
+              -1
+            );
+          });
+    }
   },
   watch: {
     order: function () {
