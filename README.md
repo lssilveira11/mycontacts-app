@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is an fronten-only app, created to study Vue.js and for a proposed challenge. The challenge was to create an responsive app to keep a contact list (create, update and delete) , with name, email and phone.
+This is an frontend-only app, created to study Vue.js and for a proposed challenge. The challenge was to create an responsive app to keep a contact list (create, update and delete) , with name, email and phone.
 
 This app was built using Vue.js 2.x. Before this, I was never developed anything with Vue.js, but I already worked with Angular JS 1.x in previous works.
 
@@ -20,6 +20,11 @@ These material was used to study and quickly understand about Vue.js:
 
 ## Structure and Screenshots
 
+![Home screen](/screenshots/home.png?raw=true "Home screen")
+
+![Details screen](/screenshots/details.png?raw=true "Details screen")
+
+![Project scheme (draft)](/screenshots/scheme.jpg?raw=true "Project scheme (draft)")
 
 ## Project setup
 
