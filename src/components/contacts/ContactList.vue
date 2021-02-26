@@ -15,7 +15,7 @@
         v-bind:key="c.id"
         v-for="c in contacts"
       >
-        <ContactListItem
+        <contact-list-item
           :contact="c"
           :loading="loading"
           @show-details="showDetails"
@@ -23,7 +23,7 @@
           @delete-contact="deleteContact"
         />
       </li>
-      <li href="#" class="list-group-item">
+      <li href="#" class="list-group-item d-none">
         <nav aria-label="Contact list page navigation">
           <ul class="pagination">
             <li class="page-item">
@@ -46,7 +46,7 @@ import ContactListItem from "./ContactListItem";
 export default {
   name: "ContactList",
   components: {
-    ContactListItem,
+    ContactListItem
   },
   props: {
     contacts: Array,

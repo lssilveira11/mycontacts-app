@@ -5,9 +5,9 @@
       <router-view
         :contacts="contacts"
         :loading="loading"
-        v-on:create-contact="createContact"
-        v-on:update-contact="updateContact"
-        v-on:delete-contact="deleteContact"
+        @create-contact="createContact"
+        @update-contact="updateContact"
+        @delete-contact="deleteContact"
       ></router-view>
     </div>
   </div>
