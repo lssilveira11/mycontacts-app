@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { bus } from "@/main";
 import ContactList from "@/components/contacts/ContactList";
 import ContactListNav from "@/components/contacts/ContactListNav";
 import _ from "lodash";
@@ -40,8 +39,8 @@ export default {
     },
   },
   created() {
-    bus.$emit("header-set-action", "new-contact");
-    bus.$emit("header-allow-back", false);
+    /*bus.$emit("header-set-action", "new-contact");
+    bus.$emit("header-allow-back", false);*/
   },
   methods: {
     deleteContact(id) {

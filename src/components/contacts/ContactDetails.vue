@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import { bus } from "@/main";
 import { v4 as uuidv4 } from "uuid";
 
 export default {
@@ -59,35 +58,15 @@ export default {
       phone: "",
     };
   },
-  created() {
-    if (!this.readonly) {
-      bus.$emit("header-set-action", "save");
-    }
-    bus.$emit("header-allow-back", true);
+  created(){
+    let contact = {
+      id: this.id || uuidv4(),
+      name: this.name,
+      email: this.email,
+      phone: this.phone,
+    };
 
-    bus.$on("header-save", this.saveContact);
-  },
-  methods: {
-    saveContact() {
-      let contact = {
-        id: this.id || uuidv4(),
-        name: this.name,
-        email: this.email,
-        phone: this.phone,
-      };
-
-      if (this.action === "create") {
-        this.$emit("create-contact", contact);
-      } else if (this.action === "update") {
-        this.$emit("update-contact", contact);
-      }
-
-      this.$router.push({ name: "Home" });
-      
-      // MUST DO THIS, otherwise this method will continue to be called from old instances, 
-      // because Vue always creates a new Component every time the route changes
-      bus.$off("header-save");
-    },
-  },
+    this.$root.contact = contact;
+  }
 };
 </script>

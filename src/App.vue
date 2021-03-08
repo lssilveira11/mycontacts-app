@@ -1,13 +1,11 @@
 <template>
   <div id="app">
     <div class="container">
-      <Header />
+      <Header 
+        @header-btn-clicked="HeaderBtnClicked" />
       <router-view
         :contacts="contacts"
         :loading="loading"
-        @create-contact="createContact"
-        @update-contact="updateContact"
-        @delete-contact="deleteContact"
       ></router-view>
     </div>
   </div>
@@ -24,6 +22,7 @@ export default {
   },
   data() {
     return {
+      contact: null,
       contacts: [],
       loading: true
     };
@@ -40,6 +39,20 @@ export default {
       });
   },
   methods: {
+    HeaderBtnClicked(args) {
+      if (args.action == "new-contact"){
+        this.$router.push({ name: "Create" });
+      }
+      else {
+        if (args.action == "create"){
+          this.createContact(this.contact)
+        }
+        else if (args.action == "edit") {
+          this.updateContact(this.contact);
+        }
+        this.$router.back();
+      }
+    },
     createContact(contact) {
       console.log(
         "🚀 ~ file: App.vue ~ line 32 ~ createContact ~ contact",
@@ -66,6 +79,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

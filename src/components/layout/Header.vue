@@ -15,41 +15,36 @@
 </template>
 
 <script>
-import { bus } from "@/main";
-
 export default {
   name: "Header",
   components: {},
   data() {
     return {
       title: "MyContacts",
-      action: "new-contact",
-      allowBack: false,
+      action: "new-contact"
     };
+  },
+  computed:{
+    allowBack: function() {
+      return !!this.$route.params.action;
+    },
   },
   methods: {
     btnClicked: function () {
+      this.$emit("header-btn-clicked", { 
+          action: this.action
+      });
+
       if (this.action === "new-contact") {
-        this.$router.push({ name: "Create" });
+        this.action = 'save';       
       } else if (this.action === "save") {
-        bus.$emit("header-save");
+        this.action = 'new-contact';
       }
     },
     backClicked: function () {
-      this.$router.back();
+      this.action = 'new-contact';      
+      this.$router.back(); // returns to the previous route
     },
-  },
-  created() {
-    // console.info("App this router:", this.$router);
-    // console.info("App currentRoute:", this.$router.currentRoute);
-
-    bus.$on("header-set-action", (action) => {
-      this.action = action;
-    });
-
-    bus.$on("header-allow-back", (allowBack) => {
-      this.allowBack = allowBack;
-    });
   },
 };
 </script>
