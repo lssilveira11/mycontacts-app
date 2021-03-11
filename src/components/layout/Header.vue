@@ -7,8 +7,8 @@
     >
       Back
     </button>
-    <router-link to="/" class="navbar-brand w-25">{{ title }}</router-link>
-    <button class="btn btn-sm btn-outline-success" @click="btnClicked">
+    <router-link to="/" class="navbar-brand">{{ title }}</router-link>
+    <button class="btn btn-sm btn-success" @click="primaryClicked">
       {{ action === "new-contact" ? "New Contact" : "Save" }}
     </button>
   </nav>
@@ -28,28 +28,30 @@ export default {
     };
   },
   methods: {
-    btnClicked: function () {
+    primaryClicked: function () {
       if (this.action === "new-contact") {
         this.$router.push({ name: "Create" });
       } else if (this.action === "save") {
-        bus.$emit("header-save");
+        bus.emit("header-save");
       }
     },
     backClicked: function () {
       this.$router.back();
     },
+    setAction(action) {
+      this.action = action;
+    },
+    setAllowBack(allowBack) {
+      this.allowBack = allowBack;
+    },
   },
   created() {
-    // console.info("App this router:", this.$router);
-    // console.info("App currentRoute:", this.$router.currentRoute);
-
-    bus.$on("header-set-action", (action) => {
-      this.action = action;
-    });
-
-    bus.$on("header-allow-back", (allowBack) => {
-      this.allowBack = allowBack;
-    });
+    bus.on("header-set-action", this.setAction);
+    bus.on("header-allow-back", this.setAllowBack);
+  },
+  beforeDestroy(){
+    bus.off("header-set-action", this.setAction);
+    bus.off("header-allow-back", this.setAllowBack);    
   },
 };
 </script>

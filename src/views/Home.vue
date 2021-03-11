@@ -23,8 +23,8 @@ export default {
     ContactListNav,
   },
   created() {
-    bus.$emit("header-set-action", "new-contact");
-    bus.$emit("header-allow-back", false);
+    bus.emit("header-set-action", "new-contact");
+    bus.emit("header-allow-back", false);
   },
   data() {
     return {
@@ -51,10 +51,12 @@ export default {
   filters: {
     filterByName(contacts, search) {
       // console.log("🚀 ~ file: Home.vue ~ line 138 ~ filterByName ~ search", search)
+      if (!search)
+        return contacts;
 
+      // filter contacts by name, using the search value
       return (
         contacts
-          // first, filter contacts by name, using the search value
           .filter((item) => {
             return item.name.toLowerCase().indexOf(search.toLowerCase()) > -1;
           })

@@ -8,6 +8,7 @@
             type="text"
             name="contactName"
             id="contactName"
+            :readonly="readonly"
             :class="[readonly ? 'form-control-plaintext' : 'form-control']"
             v-model="name"
           />
@@ -18,6 +19,7 @@
             type="email"
             name="contactEmail"
             id="contactEmail"
+            :readonly="readonly"
             :class="[readonly ? 'form-control-plaintext' : 'form-control']"
             v-model="email"
           />
@@ -28,6 +30,7 @@
             type="text"
             name="contactPhone"
             id="contactPhone"
+            :readonly="readonly"
             :class="[readonly ? 'form-control-plaintext' : 'form-control']"
             v-model="phone"
           />
@@ -60,33 +63,38 @@ export default {
     };
   },
   created() {
-    if (!this.readonly) {
-      bus.$emit("header-set-action", "save");
-    }
-    bus.$emit("header-allow-back", true);
+    bus.on("header-save", this.saveContact);
 
-    bus.$on("header-save", this.saveContact);
+    if (!this.readonly) {
+      bus.emit("header-set-action", "save");
+    }
+    bus.emit("header-allow-back", true);
+  },
+  beforeDestroy(){
+    bus.off("header-save", this.saveContact);
   },
   methods: {
     saveContact() {
+      // creates the contact object
       let contact = {
-        id: this.id || uuidv4(),
+        id: this.id || uuidv4(), // id will be generated, if doesnt exist
         name: this.name,
         email: this.email,
         phone: this.phone,
       };
 
+      // create/update the contact
       if (this.action === "create") {
         this.$store.commit("createContact", contact);
       } else if (this.action === "update") {
         this.$store.commit("updateContact", contact);
       }
 
-      this.$router.push({ name: "Home" });
-      
-      // MUST DO THIS, otherwise this method will continue to be called from old instances, 
-      // because Vue always creates a new Component every time the route changes
-      bus.$off("header-save");
+      // back do home screen
+      this.$router.push({ name: "Home" })
+        .catch(err=> {
+          console.error("ERRO no push para Home", err)
+        });
     },
   },
 };
