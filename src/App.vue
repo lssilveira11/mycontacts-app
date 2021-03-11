@@ -3,8 +3,6 @@
     <div class="container">
       <Header />
       <router-view
-        :contacts="contacts"
-        :loading="loading"
         @create-contact="createContact"
         @update-contact="updateContact"
         @delete-contact="deleteContact"
@@ -14,7 +12,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Header from "@/components/layout/Header";
 
 export default {
@@ -22,22 +19,13 @@ export default {
   components: {
     Header,
   },
-  data() {
-    return {
-      contacts: [],
-      loading: true
-    };
+  created() {    
+    this.$store.dispatch('getContacts')
   },
-  created() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((res) => {
-        this.loading = false;
-        return (this.contacts = res.data);
-      })
-      .catch((err) => {
-        console.log("🚀 ~ file: App.vue ~ line 56 ~ data ~ err", err);
-      });
+  computed: {
+    contacts(){
+      return this.$store.getters.contacts
+    }
   },
   methods: {
     createContact(contact) {
@@ -66,6 +54,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

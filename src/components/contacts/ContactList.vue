@@ -17,7 +17,6 @@
       >
         <contact-list-item
           :contact="c"
-          :loading="loading"
           @show-details="showDetails"
           @edit-contact="updateContact"
           @delete-contact="deleteContact"
@@ -50,7 +49,11 @@ export default {
   },
   props: {
     contacts: Array,
-    loading: Boolean,
+  },
+  computed: {
+    loading(){
+      return this.$store.getters.isLoading
+    }
   },
   methods: {
     showDetails(contact) {

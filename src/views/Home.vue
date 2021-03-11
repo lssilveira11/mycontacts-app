@@ -5,8 +5,7 @@
       @order-changed="changeOrder"
     ></contact-list-nav>
     <contact-list
-      :contacts="computedContacts | filterByName(searchName)"      
-      :loading="loading"
+      :contacts="computedContacts | filterByName(searchName)"
       @delete-contact="deleteContact"
     />
   </div>
@@ -30,11 +29,10 @@ export default {
       order: "asc",
     };
   },
-  props: {
-    contacts: Array,
-    loading: Boolean,
-  },
   computed: {
+    contacts(){
+      return this.$store.getters.contacts
+    },
     computedContacts() {
       return _.orderBy(this.contacts, "name", this.order);
     },
