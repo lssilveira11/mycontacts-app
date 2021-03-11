@@ -6,7 +6,6 @@
     ></contact-list-nav>
     <contact-list
       :contacts="computedContacts | filterByName(searchName)"
-      @delete-contact="deleteContact"
     />
   </div>
 </template>
@@ -23,6 +22,10 @@ export default {
     ContactList,
     ContactListNav,
   },
+  created() {
+    bus.$emit("header-set-action", "new-contact");
+    bus.$emit("header-allow-back", false);
+  },
   data() {
     return {
       searchName: "",
@@ -31,20 +34,13 @@ export default {
   },
   computed: {
     contacts(){
-      return this.$store.getters.contacts
+      return this.$store.getters.getContacts
     },
     computedContacts() {
       return _.orderBy(this.contacts, "name", this.order);
     },
   },
-  created() {
-    bus.$emit("header-set-action", "new-contact");
-    bus.$emit("header-allow-back", false);
-  },
   methods: {
-    deleteContact(id) {
-      this.$emit("delete-contact", id);
-    },
     changeOrder(order) {
       this.order = order;
     },

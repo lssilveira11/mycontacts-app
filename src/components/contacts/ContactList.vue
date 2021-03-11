@@ -17,9 +17,8 @@
       >
         <contact-list-item
           :contact="c"
-          @show-details="showDetails"
-          @edit-contact="updateContact"
-          @delete-contact="deleteContact"
+          @details-click="showDetails"
+          @edit-click="showUpdateScreen"
         />
       </li>
       <li href="#" class="list-group-item d-none">
@@ -62,14 +61,11 @@ export default {
         params: { contact: contact },
       });
     },
-    updateContact(contact) {
+    showUpdateScreen(contact) {
       this.$router.push({
         name: "Update",
         params: { contact: contact },
       });
-    },
-    deleteContact(id) {
-      this.$emit("delete-contact", id);
     },
   },
 };

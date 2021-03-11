@@ -19,6 +19,18 @@ const store = new Vuex.Store({
     },
     setContacts(state, contacts){
       state.contacts = contacts
+    },
+    createContact(state, contact){
+      state.contacts.push(contact)
+    },
+    updateContact(state, contact){
+      const idx = state.contacts.findIndex((c) => c.id == contact.id);
+      state.contacts[idx].name = contact.name;
+      state.contacts[idx].email = contact.email;
+      state.contacts[idx].phone = contact.phone;
+    },
+    deleteContact(state, id){
+      state.contacts = state.contacts.filter((c) => c.id !== id);
     }
   },
   actions: {
@@ -39,7 +51,7 @@ const store = new Vuex.Store({
   },
   getters: {
     isLoading: state => state.loadingState,
-    contacts: state => state.contacts
+    getContacts: state => state.contacts
   }
 })
 

@@ -77,9 +77,9 @@ export default {
       };
 
       if (this.action === "create") {
-        this.$emit("create-contact", contact);
+        this.$store.commit("createContact", contact);
       } else if (this.action === "update") {
-        this.$emit("update-contact", contact);
+        this.$store.commit("updateContact", contact);
       }
 
       this.$router.push({ name: "Home" });

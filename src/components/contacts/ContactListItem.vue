@@ -16,7 +16,7 @@
         role="group"
         aria-label="Button group with nested dropdown"
       >
-        <button class="btn btn-sm btn-outline-secondary" @click="showDetails(contact)">
+        <button class="btn btn-sm btn-outline-secondary" @click="detailsClick(contact)">
           Details
         </button>
 
@@ -33,7 +33,7 @@
             <a
               class="dropdown-item"
               href="#"
-              @click.prevent="updateContact(contact)"
+              @click.prevent="editClick(contact)"
               >Edit</a
             >
             <a
@@ -57,14 +57,15 @@ export default {
     contact: Object,
   },
   methods: {
-    showDetails: function (contact) {
-      this.$emit("show-details", contact);
+    detailsClick: function (contact) {
+      this.$emit("details-click", contact);
     },
-    updateContact: function (contact) {
-      this.$emit("edit-contact", contact);
+    editClick: function (contact) {
+      this.$emit("edit-click", contact);
     },
     deleteContact: function (id) {
-      this.$emit("delete-contact", id);
+      if(confirm('Are you sure you want to delete this item?'))
+      this.$store.commit('deleteContact', id);
     },
   },
 };
