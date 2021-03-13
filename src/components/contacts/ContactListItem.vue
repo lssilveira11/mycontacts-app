@@ -65,7 +65,7 @@ export default {
     },
     deleteContact: function (id) {
       if(confirm('Are you sure you want to delete this item?'))
-      this.$store.commit('deleteContact', id);
+      this.$store.dispatch('deleteContact', {id});
     },
   },
 };

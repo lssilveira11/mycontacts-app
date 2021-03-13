@@ -42,7 +42,7 @@
 
 <script>
 import { bus } from "@/main";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
 export default {
   name: "ContactDetails",
@@ -77,7 +77,7 @@ export default {
     saveContact() {
       // creates the contact object
       let contact = {
-        id: this.id || uuidv4(), // id will be generated, if doesnt exist
+        // id: this.id || uuidv4(), // id will be generated, if doesnt exist
         name: this.name,
         email: this.email,
         phone: this.phone,
@@ -85,9 +85,9 @@ export default {
 
       // create/update the contact
       if (this.action === "create") {
-        this.$store.commit("createContact", contact);
+        this.$store.dispatch("createContact", contact);
       } else if (this.action === "update") {
-        this.$store.commit("updateContact", contact);
+        this.$store.dispatch("updateContact", {id: this.id, contactData: contact});
       }
 
       // back do home screen

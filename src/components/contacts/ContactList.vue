@@ -8,33 +8,42 @@
       </div>
     </div>
 
-    <ul class="list-group" v-if="!loading">
-      <li
-        href="#"
-        class="list-group-item"
-        v-bind:key="c.id"
-        v-for="c in contacts"
-      >
-        <contact-list-item
-          :contact="c"
-          @details-click="showDetails"
-          @edit-click="showUpdateScreen"
-        />
-      </li>
-      <li href="#" class="list-group-item d-none">
-        <nav aria-label="Contact list page navigation">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
-        </nav>
-      </li>
-    </ul>
+    <div v-if="contacts.length && !loading">
+      <ul class="list-group" v-if="!loading">
+        <li
+          href="#"
+          class="list-group-item"
+          v-bind:key="c.id"
+          v-for="c in contacts"
+        >
+          <contact-list-item
+            :contact="c"
+            @details-click="showDetails"
+            @edit-click="showUpdateScreen"
+          />
+        </li>
+        <li href="#" class="list-group-item d-none">
+          <nav aria-label="Contact list page navigation">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+        </li>
+      </ul>
+    </div>
+
+    <!--empty data template-->
+    <div v-if="!contacts.length && !loading" class="card card-body text-center">
+      <p class="card-text text-muted">
+        You don't have any contact. Please, create a new contact to start.
+      </p>
+    </div>
   </div>
 </template>
   
