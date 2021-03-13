@@ -1,5 +1,5 @@
 <template>
-  <div class="row no-gutters align-items-center">
+  <div class="row no-gutters align-items-center" data-cy="contact-list-item">
     <div class="col-8 col-sm-9">
       <div class="row row-cols-1 row-cols-md-2">
         <div class="col">

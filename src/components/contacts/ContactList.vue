@@ -9,7 +9,7 @@
     </div>
 
     <div v-if="contacts.length && !loading">
-      <ul class="list-group" v-if="!loading">
+      <ul class="list-group" v-if="!loading" data-cy="contact-list">
         <li
           href="#"
           class="list-group-item"

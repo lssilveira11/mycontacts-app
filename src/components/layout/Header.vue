@@ -8,7 +8,7 @@
       Back
     </button>
     <router-link to="/" class="navbar-brand">{{ title }}</router-link>
-    <button class="btn btn-sm btn-success" @click="primaryClicked">
+    <button class="btn btn-sm btn-success" @click="primaryClicked" data-cy="default-btn">
       {{ action === "new-contact" ? "New Contact" : "Save" }}
     </button>
   </nav>
